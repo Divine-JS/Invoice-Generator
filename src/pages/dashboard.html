@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Invoice Generator</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-file-invoice"></i>
+                <span>Invoice Generator</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="landing.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="invoice.html" class="nav-item">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Invoice</span>
+                </a>
+                <a href="invoice-history.html" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>Invoice History</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="window.location.href='invoice.html'">
+                        <i class="fas fa-plus"></i> Create Invoice
+                    </button>
+                </div>
+            </header>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="overview">Overview</button>
+            </div>
+
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <section class="stats-container" id="stats-container">
+                    <div class="stat-card">
+                        <i class="fas fa-file-invoice"></i>
+                        <h3>Total Invoices</h3>
+                        <p id="totalInvoices">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Total Revenue</h3>
+                        <p id="totalAmount">$0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Pending</h3>
+                        <p id="pendingInvoices">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Paid</h3>
+                        <p>0</p>
+                    </div>
+                </section>
+
+                <section class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list" id="recentActivity">
+                        <div class="activity-item">
+                            <i class="fas fa-plus-circle activity-icon"></i>
+                            <div class="activity-content">
+                                <p>Ready to start creating invoices</p>
+                                <span class="activity-time">Just now</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- History View -->
+            <div class="content-section" id="history-section" style="display: none;">
+                <div class="history-tab">
+                    <div class="section-header">
+                        <h2>Invoice History</h2>
+                    </div>
+                    <div id="invoiceHistory" class="invoice-history">
+                        <!-- Invoice history items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading dashboard...</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import loadingManager from '../assets/js/loading.js';
+        import { themeManager } from '../assets/js/themeManager.js';
+        import { initializeNavigation } from '../assets/js/navigation.js';
+        import '../assets/js/dashboard.js';
+
+        // Initialize loading screen and navigation
+        document.addEventListener('DOMContentLoaded', () => {
+            loadingManager.show('Loading dashboard...');
+            initializeNavigation();
+            
+            setTimeout(() => {
+                loadingManager.hide();
+            }, 1000);
+        });
+
+        // Add responsive table container with horizontal scroll
+        const tables = document.querySelectorAll('.invoice-table');
+        tables.forEach(table => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        });
+
+        // Add tooltip functionality for truncated text
+        const cells = document.querySelectorAll('.table-row > div');
+        cells.forEach(cell => {
+            if (cell.scrollWidth > cell.clientWidth) {
+                cell.setAttribute('title', cell.textContent);
+            }
+        });
+    </script>
+</body>
+</html>

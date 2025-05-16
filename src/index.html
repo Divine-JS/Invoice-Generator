@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create professional invoices in seconds with our free invoice generator. Export to PDF, manage clients, and send invoices easily. Perfect for freelancers and small businesses.">
+    <meta name="keywords" content="invoice generator, free invoice maker, professional invoices, PDF invoice, invoice template, business invoicing, freelancer invoice">
+    <meta name="author" content="Invoice Generator">
+    <meta name="robots" content="index, follow">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Invoice Generator">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Professional Invoice Generator | Create & Send Invoices Free">
+    <meta property="og:description" content="Create professional invoices in seconds with our free invoice generator. Export to PDF, manage clients, and send invoices easily.">
+    <meta property="og:image" content="/assets/images/og-image.png">
+    <meta property="og:url" content="https://invoice-generator.com">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professional Invoice Generator | Create & Send Invoices Free">
+    <meta name="twitter:description" content="Create professional invoices in seconds with our free invoice generator. Perfect for freelancers and small businesses.">
+    <meta name="twitter:image" content="/assets/images/twitter-card.png">
+    
+    <!-- PWA Links -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/icon-192x192.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://invoice-generator.com">
+    
+    <title>Professional Invoice Generator | Create & Send Invoices Free</title>
+    
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/landing.css">
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.error('ServiceWorker registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <script>
+        // Redirect to landing page
+        window.location.href = '/pages/landing.html';
+    </script>
+</body>
+</html>

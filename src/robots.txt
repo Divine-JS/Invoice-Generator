@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /pages/landing.html
+Allow: /assets/css/
+Allow: /assets/images/
+
+Disallow: /pages/dashboard.html
+Disallow: /pages/invoice.html
+Disallow: /pages/invoice-history.html
+Disallow: /pages/settings.html
+
+Sitemap: https://invoice-generator.com/sitemap.xml

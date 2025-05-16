@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create professional invoices in seconds with our free invoice generator. Export to PDF, manage clients, and send invoices easily. Perfect for freelancers and small businesses.">
+    <meta name="keywords" content="invoice generator, free invoice maker, professional invoices, PDF invoice, invoice template, business invoicing, freelancer invoice">
+    <meta name="author" content="Invoice Generator">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Professional Invoice Generator | Create & Send Invoices Free">
+    <meta property="og:description" content="Create professional invoices in seconds with our free invoice generator. Export to PDF, manage clients, and send invoices easily.">
+    <meta property="og:image" content="/assets/images/og-image.png">
+    <meta property="og:url" content="https://invoice-generator.com">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Professional Invoice Generator | Create & Send Invoices Free">
+    <meta name="twitter:description" content="Create professional invoices in seconds with our free invoice generator. Perfect for freelancers and small businesses.">
+    <meta name="twitter:image" content="/assets/images/twitter-card.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://invoice-generator.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preload" href="/assets/css/styles.css" as="style">
+    <link rel="preload" href="/assets/css/landing.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <link rel="preload" href="/assets/images/og-image.png" as="image">
+    
+    <title>Professional Invoice Generator | Create & Send Invoices Free</title>
+    <link rel="stylesheet" href="../assets/css/landing.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading...</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fas fa-file-invoice"></i>
+                <span>Invoice Generator</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="dashboard.html" class="cta-button">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Effortless Professional Invoicing</h1>
+                <p class="hero-subtitle">Create, manage, and send beautiful invoices in seconds. Built for modern businesses.</p>
+                <div class="cta-group">
+                    <a href="./dashboard.html" class="primary-button">Get Started <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import loadingManager from '../assets/js/loading.js';
+        import { themeManager } from '../assets/js/themeManager.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            loadingManager.show('Loading...');
+            window.addEventListener('load', () => {
+                loadingManager.hide();
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

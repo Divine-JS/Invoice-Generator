@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Invoice Generator</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-file-invoice"></i>
+                <span>Invoice Generator</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="invoice.html" class="nav-item">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Invoice</span>
+                </a>
+                <a href="invoice-history.html" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>Invoice History</span>
+                </a>
+                <a href="settings.html" class="nav-item active">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Settings</h1>
+                <div class="header-actions">
+                    <button id="saveSettings" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </header>
+
+            <div class="settings-container">
+                <!-- Settings Navigation -->
+                <nav class="settings-nav">
+                    <div class="settings-nav-items">
+                        <button class="settings-nav-item active" data-section="business">
+                            <i class="fas fa-building"></i>
+                            <span>Business Profile</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="invoice">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Invoice Preferences</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="appearance">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Appearance</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="notifications">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="integrations">
+                            <i class="fas fa-plug"></i>
+                            <span>Integrations</span>
+                        </button>
+                        <button class="settings-nav-item" data-section="backup">
+                            <i class="fas fa-cloud"></i>
+                            <span>Backup & Restore</span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- Business Profile Section -->
+                    <section class="settings-section active" id="business-section" data-section="business">
+                        <div class="settings-header">
+                            <h2><i class="fas fa-building"></i> Business Profile</h2>
+                            <p>Manage your business information that appears on your invoices</p>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="settings-card">
+                                <div class="form-group logo-upload-container">
+                                    <label>Business Logo</label>
+                                    <div class="logo-upload">
+                                        <div class="logo-preview">
+                                            <img id="logoPreview" src="../assets/images/placeholder-logo.png" alt="Business Logo">
+                                            <div class="logo-overlay">
+                                                <i class="fas fa-camera"></i>
+                                                <span>Change Logo</span>
+                                            </div>
+                                        </div>
+                                        <input type="file" id="businessLogo" accept="image/*" hidden>
+                                        <button type="button" class="btn btn-outline" id="uploadLogo">
+                                            <i class="fas fa-upload"></i> Upload Logo
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label for="businessName">Business Name</label>
+                                    <input type="text" id="businessName" class="form-control" placeholder="Enter your business name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="businessEmail">Business Email</label>
+                                    <input type="email" id="businessEmail" class="form-control" placeholder="Enter your business email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="businessPhone">Business Phone</label>
+                                    <input type="tel" id="businessPhone" class="form-control" placeholder="Enter your business phone">
+                                </div>
+                            </div>
+
+                            <div class="settings-card full-width">
+                                <div class="form-group">
+                                    <label for="businessAddress">Business Address</label>
+                                    <textarea id="businessAddress" class="form-control" rows="3" placeholder="Enter your complete business address"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Invoice Preferences Section -->
+                    <section class="settings-section" id="invoice-section" data-section="invoice">
+                        <div class="settings-header">
+                            <h2><i class="fas fa-file-invoice"></i> Invoice Preferences</h2>
+                            <p>Customize your invoice settings and default values</p>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label for="currency">Default Currency</label>
+                                    <select id="currency" class="form-control">
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                        <option value="JPY">JPY (¥)</option>
+                                        <option value="CAD">CAD ($)</option>
+                                        <option value="AUD">AUD ($)</option>
+                                        <option value="INR">INR (₹)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="taxRate">Default Tax Rate (%)</label>
+                                    <input type="number" id="taxRate" class="form-control" min="0" max="100" step="0.01">
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label for="invoicePrefix">Invoice Number Prefix</label>
+                                    <input type="text" id="invoicePrefix" class="form-control" placeholder="e.g., INV-">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nextInvoiceNumber">Next Invoice Number</label>
+                                    <input type="number" id="nextInvoiceNumber" class="form-control" min="1">
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label for="paymentTerms">Default Payment Terms</label>
+                                    <select id="paymentTerms" class="form-control">
+                                        <option value="immediate">Immediate</option>
+                                        <option value="7">Net 7</option>
+                                        <option value="14">Net 14</option>
+                                        <option value="30" selected>Net 30</option>
+                                        <option value="60">Net 60</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
+                                <div id="customTermsGroup" class="form-group" style="display: none;">
+                                    <label for="customTerms">Custom Terms (days)</label>
+                                    <input type="number" id="customTerms" class="form-control" min="1" max="365">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Appearance Section -->
+                    <section class="settings-section" id="appearance-section" data-section="appearance">
+                        <div class="settings-header">
+                            <h2><i class="fas fa-paint-brush"></i> Appearance</h2>
+                            <p>Customize the look and feel of your invoice generator</p>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label>Theme</label>
+                                    <div class="theme-selector">
+                                        <label class="theme-option">
+                                            <input type="radio" name="theme" value="light">
+                                            <span class="theme-preview light">
+                                                <i class="fas fa-sun"></i>
+                                                <span>Light</span>
+                                            </span>
+                                        </label>
+                                        <label class="theme-option">
+                                            <input type="radio" name="theme" value="dark">
+                                            <span class="theme-preview dark">
+                                                <i class="fas fa-moon"></i>
+                                                <span>Dark</span>
+                                            </span>
+                                        </label>
+                                        <label class="theme-option">
+                                            <input type="radio" name="theme" value="system">
+                                            <span class="theme-preview system">
+                                                <i class="fas fa-desktop"></i>
+                                                <span>System</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label for="accentColor">Brand Color</label>
+                                    <div class="color-picker">
+                                        <input type="color" id="accentColor" value="#2563eb">
+                                        <div class="color-presets">
+                                            <button type="button" class="color-preset" data-color="#2563eb" style="background-color: #2563eb;"></button>
+                                            <button type="button" class="color-preset" data-color="#10B981" style="background-color: #10B981;"></button>
+                                            <button type="button" class="color-preset" data-color="#6366F1" style="background-color: #6366F1;"></button>
+                                            <button type="button" class="color-preset" data-color="#F59E0B" style="background-color: #F59E0B;"></button>
+                                            <button type="button" class="color-preset" data-color="#EF4444" style="background-color: #EF4444;"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <div class="form-group">
+                                    <label>Font Size</label>
+                                    <div class="font-size-selector">
+                                        <button type="button" class="btn btn-outline" data-size="small">Small</button>
+                                        <button type="button" class="btn btn-outline active" data-size="medium">Medium</button>
+                                        <button type="button" class="btn btn-outline" data-size="large">Large</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Notifications Section -->
+                    <section class="settings-section" id="notifications-section" data-section="notifications">
+                        <div class="settings-header">
+                            <h2><i class="fas fa-bell"></i> Notifications</h2>
+                            <p>Manage your notification preferences</p>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="settings-card full-width">
+                                <div class="notification-preferences">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="emailNotifications">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Email Notifications</span>
+                                    </label>
+                                    <p class="notification-description">Receive email notifications when invoices are viewed, paid, or overdue</p>
+                                </div>
+
+                                <div class="notification-preferences">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="reminderNotifications">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Payment Reminders</span>
+                                    </label>
+                                    <p class="notification-description">Send automatic payment reminders for overdue invoices</p>
+                                </div>
+
+                                <div class="notification-preferences">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="desktopNotifications">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Desktop Notifications</span>
+                                    </label>
+                                    <p class="notification-description">Show desktop notifications for important updates</p>
+                                </div>
+                            </div>
+
+                            <div class="settings-card full-width">
+                                <h3>Email Notification Settings</h3>
+                                <div class="email-settings">
+                                    <div class="form-group">
+                                        <label for="reminderDays">Send Payment Reminders</label>
+                                        <select id="reminderDays" class="form-control" multiple>
+                                            <option value="7">7 days before due</option>
+                                            <option value="3">3 days before due</option>
+                                            <option value="1">1 day before due</option>
+                                            <option value="0">On due date</option>
+                                            <option value="-1">1 day after due</option>
+                                            <option value="-3">3 days after due</option>
+                                            <option value="-7">7 days after due</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Integrations Section -->
+                    <section class="settings-section" id="integrations-section" data-section="integrations">
+                        <div class="settings-header">
+                            <h2><i class="fas fa-plug"></i> Integrations</h2>
+                            <p>Connect your favorite tools and services</p>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="settings-card integration-card">
+                                <div class="integration-header">
+                                    <img src="../assets/images/stripe-logo.png" alt="Stripe">
+                                    <span class="integration-status">Not Connected</span>
+                                </div>
+                                <p>Accept online payments through Stripe</p>
+                                <button class="btn btn-outline" id="connectStripe">
+                                    <i class="fas fa-plug"></i> Connect Stripe
+                                </button>
+                            </div>
+
+                            <div class="settings-card integration-card">
+                                <div class="integration-header">
+                                    <img src="../assets/images/paypal-logo.png" alt="PayPal">
+                                    <span class="integration-status">Not Connected</span>
+                                </div>
+                                <p>Accept payments through PayPal</p>
+                                <button class="btn btn-outline" id="connectPaypal">
+                                    <i class="fas fa-plug"></i> Connect PayPal
+                                </button>
+                            </div>
+
+                            <div class="settings-card integration-card">
+                                <div class="integration-header">
+                                    <i class="fab fa-google fa-2x"></i>
+                                    <span class="integration-status">Not Connected</span>
+                                </div>
+                                <p>Sync with Google Calendar</p>
+                                <button class="btn btn-outline" id="connectGoogle">
+                                    <i class="fas fa-plug"></i> Connect Google
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Backup Section -->
+                    <section class="settings-section" id="backup-section" data-section="backup">
+                        <div class="settings-header">
+                            <h2><i class="fas fa-cloud"></i> Backup & Restore</h2>
+                            <p>Manage your data backups and restore points</p>
+                        </div>
+
+                        <div class="settings-grid">
+                            <div class="settings-card">
+                                <h3>Manual Backup</h3>
+                                <p>Download a complete backup of your invoice data</p>
+                                <button class="btn btn-primary" id="backupData">
+                                    <i class="fas fa-download"></i> Download Backup
+                                </button>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3>Restore Data</h3>
+                                <p>Restore your data from a previous backup</p>
+                                <div class="form-group">
+                                    <input type="file" id="restoreFile" accept=".json" hidden>
+                                    <button class="btn btn-outline" id="restoreData">
+                                        <i class="fas fa-upload"></i> Restore from Backup
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="settings-card">
+                                <h3>Auto Backup</h3>
+                                <div class="form-group">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="autoBackup">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-label">Enable Auto Backup</span>
+                                    </label>
+                                    <p class="notification-description">Automatically backup your data every day</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="unsavedChangesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Unsaved Changes</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>You have unsaved changes. Do you want to save them before leaving?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="discardChanges">Discard</button>
+                <button class="btn btn-primary" id="saveChanges">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeNavigation } from '../assets/js/navigation.js';
+        import { themeManager } from '../assets/js/themeManager.js';
+        import { loadingManager } from '../assets/js/loading.js';
+        import { SettingsManager } from '../assets/js/settings.js';
+
+        window.addEventListener('DOMContentLoaded', function() {
+            initializeNavigation();
+            window.settingsManager = new SettingsManager();
+        });
+    </script>
+</body>
+</html>

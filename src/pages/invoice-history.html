@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice History - Invoice Generator</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invoice.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="invoice-page">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-file-invoice"></i>
+                <span>Invoice Generator</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="landing.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="invoice.html" class="nav-item">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Invoice</span>
+                </a>
+                <a href="invoice-history.html" class="nav-item active">
+                    <i class="fas fa-history"></i>
+                    <span>Invoice History</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div class="header-content">
+                    <h1>Invoice History</h1>
+                    <span class="invoice-count">0 invoices</span>
+                </div>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="window.location.href='invoice.html'">
+                        <i class="fas fa-plus"></i> New Invoice
+                    </button>
+                </div>
+            </header>
+
+            <div class="invoice-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search invoices...">
+                </div>
+
+                <div class="filter-buttons">
+                    <button class="btn btn-filter active" data-filter="all">
+                        <i class="fas fa-list"></i> All
+                    </button>
+                    <button class="btn btn-filter" data-filter="pending">
+                        <i class="fas fa-clock"></i> Pending
+                    </button>
+                    <button class="btn btn-filter" data-filter="paid">
+                        <i class="fas fa-check-circle"></i> Paid
+                    </button>
+                    <button class="btn btn-filter" data-filter="draft">
+                        <i class="fas fa-file"></i> Draft
+                    </button>
+                </div>
+            </div>
+
+            <div id="invoiceList" class="invoice-list">
+                <!-- Invoices will be loaded here dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Enhanced Preview Modal -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-invoice"></i> Invoice Preview</h2>
+                <button class="close-modal" id="closePreviewModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="previewModalContent">
+                <!-- Invoice preview content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="../assets/js/invoice-history.js"></script>
+</body>
+</html>

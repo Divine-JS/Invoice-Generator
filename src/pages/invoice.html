@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Invoice - Invoice Generator</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/invoice.css">
+    <link rel="stylesheet" href="../assets/css/loading.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Preparing your invoice...</div>
+        <div class="loading-progress">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <div class="invoice-page">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-file-invoice"></i>
+                <span>Invoice Generator</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="landing.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="invoice.html" class="nav-item active">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>New Invoice</span>
+                </a>
+                <a href="invoice-history.html" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>Invoice History</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Create New Invoice</h1>
+                <div class="actions">
+                    <button class="btn btn-outline" id="save-draft">
+                        <i class="fas fa-save"></i> Save Draft
+                    </button>
+                </div>
+            </header>
+
+            <div class="invoice-container">
+                <form id="invoice-form" class="invoice-form">
+                    <div class="form-section">
+                        <h2>Bill From</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="company-name">Company Name</label>
+                                <input type="text" id="company-name" name="company-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company-email">Email</label>
+                                <input type="email" id="company-email" name="company-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company-address">Address</label>
+                                <textarea id="company-address" name="company-address" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Bill To</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="client-name">Client Name</label>
+                                <input type="text" id="client-name" name="client-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="client-email">Client Email</label>
+                                <input type="email" id="client-email" name="client-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="client-address">Client Address</label>
+                                <textarea id="client-address" name="client-address" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Invoice Details</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="invoice-number">Invoice Number</label>
+                                <input type="text" id="invoice-number" name="invoice-number" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="invoice-date">Invoice Date</label>
+                                <input type="date" id="invoice-date" name="invoice-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="due-date">Due Date</label>
+                                <input type="date" id="due-date" name="due-date" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Items</h2>
+                        <div class="items-table">
+                            <div class="items-header">
+                                <div>Item Description</div>
+                                <div>Quantity</div>
+                                <div>Price</div>
+                                <div>Total</div>
+                                <div></div>
+                            </div>
+                            <div id="items-container"></div>
+                            <button type="button" class="btn btn-outline btn-small" id="add-item">
+                                <i class="fas fa-plus"></i> Add Item
+                            </button>
+                        </div>
+
+                        <div class="invoice-summary">
+                            <div class="summary-item">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Tax (10%)</span>
+                                <span id="tax">$0.00</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2>Additional Notes</h2>
+                        <div class="form-group">
+                            <textarea id="notes" name="notes" placeholder="Add any additional notes or payment terms"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="action-group">
+                            <button type="button" class="btn btn-outline" id="cancel">Cancel</button>
+                            <button type="button" class="btn btn-secondary" id="clear-all">
+                                <i class="fas fa-eraser"></i> Clear All
+                            </button>
+                        </div>
+                        <div class="action-group">
+                            <button type="button" class="btn btn-success" id="save-invoice">
+                                <i class="fas fa-save"></i> Save Invoice
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="download-pdf">
+                                <i class="fas fa-file-pdf"></i> Download PDF
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="print-invoice">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module">
+        import '../assets/js/invoice.js';
+    </script>
+</body>
+</html>
