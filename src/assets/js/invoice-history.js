@@ -328,17 +328,9 @@ class InvoiceHistory {
                     </table>
 
                     <div class="invoice-summary">
-                        <div class="summary-row">
-                            <span>Subtotal:</span>
-                            <span>$${invoice.subtotal.toFixed(2)}</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Tax:</span>
-                            <span>$${invoice.tax.toFixed(2)}</span>
-                        </div>
                         <div class="summary-row total">
                             <span>Total:</span>
-                            <span>$${invoice.total.toFixed(2)}</span>
+                            <span>$${invoice.subtotal.toFixed(2)}</span>
                         </div>
                     </div>
 

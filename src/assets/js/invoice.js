@@ -13,8 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const addItemButton = document.getElementById('add-item');
     const itemsContainer = document.getElementById('items-container');
     const subtotalElement = document.getElementById('subtotal');
-    const taxElement = document.getElementById('tax');
-    const totalElement = document.getElementById('total');
     const saveInvoiceButton = document.getElementById('save-invoice');
     const downloadPdfButton = document.getElementById('download-pdf');
     const printInvoiceButton = document.getElementById('print-invoice');
@@ -233,10 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear notes
         document.getElementById('notes').value = '';
         
-        // Reset totals
+        // Reset total
         subtotalElement.textContent = '$0.00';
-        taxElement.textContent = '$0.00';
-        totalElement.textContent = '$0.00';
         
         // Generate new invoice number
         nextInvoiceNumber = generateInvoiceNumber();
@@ -290,12 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
             subtotal += quantity * price;
         });
 
-        const tax = subtotal * 0.1; // 10% tax
-        const total = subtotal + tax;
-
         subtotalElement.textContent = formatCurrency(subtotal);
-        taxElement.textContent = formatCurrency(tax);
-        totalElement.textContent = formatCurrency(total);
     }
 
     function validateForm() {
@@ -367,8 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 total: parseFloat(row.querySelector('.item-total').textContent.replace(/[^0-9.-]+/g, ''))
             })),
             subtotal: parseFloat(subtotalElement.textContent.replace(/[^0-9.-]+/g, '')),
-            tax: parseFloat(taxElement.textContent.replace(/[^0-9.-]+/g, '')),
-            total: parseFloat(totalElement.textContent.replace(/[^0-9.-]+/g, '')),
+            total: parseFloat(subtotalElement.textContent.replace(/[^0-9.-]+/g, '')),
             notes: document.getElementById('notes').value
         };
         return invoiceData;
@@ -451,17 +441,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
 
                 <div class="invoice-totals">
-                    <div class="total-row">
-                        <span>Subtotal</span>
-                        <span>${formatCurrency(invoice.subtotal)}</span>
-                    </div>
-                    <div class="total-row">
-                        <span>Tax (10%)</span>
-                        <span>${formatCurrency(invoice.tax)}</span>
-                    </div>
                     <div class="total-row total">
                         <span>Total</span>
-                        <span>${formatCurrency(invoice.total)}</span>
+                        <span>${formatCurrency(invoice.subtotal)}</span>
                     </div>
                 </div>
 
