@@ -7,7 +7,24 @@
       "src": "/assets/(.*)",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
-      }
+      },
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/pages/dashboard.html"
+    },
+    {
+      "src": "/invoice",
+      "dest": "/pages/invoice.html"
+    },
+    {
+      "src": "/invoice-history",
+      "dest": "/pages/invoice-history.html"
+    },
+    {
+      "src": "/settings",
+      "dest": "/pages/settings.html"
     },
     {
       "src": "/(.*)",
@@ -21,6 +38,6 @@
       }
     },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/" }
+    { "src": "/(.*)", "dest": "/pages/landing.html" }
   ]
 }
